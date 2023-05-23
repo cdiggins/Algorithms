@@ -32,6 +32,23 @@ public static class ArrayProblems
         throw new NotImplementedException();
     }
 
+    public static int CountElement<T>(T[] xs, T element)
+    { 
+        throw new NotImplementedException();
+    }
+
+    public static string ToCommaDelimitedString<T>(T[] xs)
+    {
+        throw new NotImplementedException();
+    }
+
+    // Bonus problems
+
+    public static int Count<T>(T[] xs, Func<T, bool> predicate)
+    {
+        throw new NotImplementedException();
+    }
+
     public static T Min<T>(T[] xs, Func<T, T, int> comparer)
     {
         throw new NotImplementedException();
@@ -42,42 +59,6 @@ public static class ArrayProblems
         throw new NotImplementedException();
     }
 
-    public static int IndexOfMin<T>(T[] xs, Func<T, T, int> comparer)
-    {
-        throw new NotImplementedException();
-    }
-
-    public static int IndexOfMax<T>(T[] xs, Func<T, T, int> comparer)
-    {
-        throw new NotImplementedException();
-    }
-
-    public static int IndexOf<T>(T[] xs, T element)
-    {
-        throw new NotImplementedException();
-    }
-
-    public static int IndexOf<T>(T[] xs, Func<T, bool> predicate)
-    {
-        throw new NotImplementedException();
-    }
-
-    public static int Count<T>(T[] xs, T element)
-    {
-        throw new NotImplementedException();
-    }
-
-    public static int Count<T>(T[] xs, Func<T, bool> predicate)
-    {
-        throw new NotImplementedException();
-    }
-
-    public static string ToCommaDelimitedString<T>(T[] xs)
-    {
-        throw new NotImplementedException();
-    }
-
-    // Bonus problem:
     public static bool HasDuplicates<T>(T[] xs)
     {
         throw new NotImplementedException();

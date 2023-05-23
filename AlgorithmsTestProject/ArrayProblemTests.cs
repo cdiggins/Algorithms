@@ -44,6 +44,7 @@ public static class ArrayProblemsTests
             yield return seed2;
             var old = seed2;
             seed2 = gen(seed1, seed2);
+            seed1 = old;
         }
     }
 
@@ -113,7 +114,7 @@ public static class ArrayProblemsTests
     {
         if (input.Length < 1)
         {
-            Assert.Throws<Exception>(() => ArrayProblems.Swap(input, 0, 1));
+            Assert.Throws<Exception>(() => ArrayProblems.FirstElement(input));
         }
         else
         {
@@ -122,75 +123,102 @@ public static class ArrayProblemsTests
     }
 
     [Test]
-    public static void LastElementTest()
+    [TestCaseSource(nameof(TestInputs))]
+    public static void LastElementTest(int[] input)
     {
-        Assert.Fail();
+        if (input.Length < 1)
+        {
+            Assert.Throws<Exception>(() => ArrayProblems.LastElement(input));
+        }
+        else
+        {
+            Assert.AreEqual(input[input.Length - 1], ArrayProblems.LastElement(input));
+        }
     }
 
     [Test]
-    public static void MiddleElementTest()
+    [TestCaseSource(nameof(TestInputs))]
+    public static void MiddleElementTest(int[] input)
     {
-        Assert.Fail();
+        if (input.Length < 1)
+        {
+            Assert.Throws<Exception>(() => ArrayProblems.MiddleElement(input));
+        }
+        else
+        {
+            Assert.AreEqual(input[input.Length / 2], ArrayProblems.MiddleElement(input));
+        }
     }
 
     [Test]
-    public static void ReverseTest()
+    [TestCaseSource(nameof(TestInputs))]
+    public static void ReverseTest(int[] input)
     {
-        Assert.Fail();
+        var output = input.ToArray();
+        var expected = input.Reverse().ToString();
+        ArrayProblems.Reverse(output);
+        Assert.AreEqual(expected, output);
     }
 
     [Test]
-    public static void MinTest()
+    [TestCaseSource(nameof(TestInputs))]
+    public static void MinTest(int[] input)
     {
-        Assert.Fail();
+        if (input.Length < 1)
+        {
+            Assert.Throws<Exception>(() => ArrayProblems.Min(input, (a,b) => b - a));
+        }
+        else
+        {
+            Assert.AreEqual(input.Min(x => x),
+                ArrayProblems.Min(input, (a, b) => b - a));
+        }
     }
 
     [Test]
-    public static void MaxTest()
+    [TestCaseSource(nameof(TestInputs))]
+    public static void MaxTest(int[] input)
     {
-        Assert.Fail();
+        if (input.Length < 1)
+        {
+            Assert.Throws<Exception>(() => ArrayProblems.Max(input, (a, b) => b - a));
+        }
+        else
+        {
+            Assert.AreEqual(input.Max(x => x),
+                ArrayProblems.Max(input, (a, b) => b - a));
+        }
     }
 
     [Test]
-    public static void IndexOfMinTest()
-    {
-        Assert.Fail();
+    [TestCaseSource(nameof(TestInputs))]
+    public static void ToCommaDelimitedStringTest(int[] input)
+    { 
+        Assert.AreEqual(string.Join(",", input), ArrayProblems.ToCommaDelimitedString(input));
     }
 
     [Test]
-    public static void IndexOfMaxTest()
+    [TestCaseSource(nameof(TestInputs))]
+    public static void CountElementTest(int[] input)
     {
-        Assert.Fail();
+        Assert.AreEqual(input.Count(x => x == 1), 
+            ArrayProblems.CountElement(input, 1));
     }
 
     [Test]
-    public static void IndexOfTest()
+    [TestCaseSource(nameof(TestInputs))]
+    public static void CountTest(int[] input)
     {
-        Assert.Fail();
+        Assert.AreEqual(input.Count(x => x == 1),
+            ArrayProblems.Count(input, x => x == 1));
     }
 
     [Test]
-    public static void IndexOfTest1()
+    [TestCaseSource(nameof(TestInputs))]
+    public static void HasDuplicatesTest(int[] input)
     {
-        Assert.Fail();
-    }
-
-    [Test]
-    public static void CountTest()
-    {
-        Assert.Fail();
-    }
-
-    [Test]
-    public static void CountTest1()
-    {
-        Assert.Fail();
-    }
-
-    [Test]
-    public static void HasDuplicatesTest()
-    {
-        Assert.Fail();
+        Assert.AreEqual(input.Distinct().Count() == input.Length, 
+            ArrayProblems.HasDuplicates(input));
     }
 
     [Test]
