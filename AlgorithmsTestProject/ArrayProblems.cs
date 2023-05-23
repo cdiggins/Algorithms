@@ -9,7 +9,8 @@ public static class ArrayProblems
 
     public static void Swap<T>(T[] xs, int a, int b)
     {
-        throw new NotImplementedException();
+        xs[a] = xs[b];
+        xs[b] = xs[a];
     }
 
     public static T FirstElement<T>(T[] xs)

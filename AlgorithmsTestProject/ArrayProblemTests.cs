@@ -94,7 +94,7 @@ public static class ArrayProblemsTests
     {
         if (input.Length < 2)
         {
-            Assert.Throws<Exception>(() => ArrayProblems.Swap(input, 0, 1));
+            Assert.Throws<IndexOutOfRangeException>(() => ArrayProblems.Swap(input, 0, 1));
         }
         else
         {
@@ -155,7 +155,7 @@ public static class ArrayProblemsTests
     public static void ReverseTest(int[] input)
     {
         var output = input.ToArray();
-        var expected = input.Reverse().ToString();
+        var expected = input.Reverse().ToArray();
         ArrayProblems.Reverse(output);
         Assert.AreEqual(expected, output);
     }
