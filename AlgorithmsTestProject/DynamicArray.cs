@@ -35,10 +35,18 @@ public abstract class BaseArray<T> : IDynamicArray<T>
     }
 
     public void Insert(int index, T item)
-        => throw new NotImplementedException();
-    
+    {
+        var oldCount = Count;
+        Add(item);
+        Array.Copy(_array, index, _array, index + 1, oldCount - index);
+        this[index] = item;
+    }
+
     public T Remove(int index)
-        => throw new NotImplementedException();
+    {
+        Array.Copy(_array, index + 1, _array, index, Count - index + 1);
+        Count -= 1;
+    }
 }
 
 public class DynamicArray<T> : BaseArray<T>
@@ -77,56 +85,5 @@ public class DynamicArrayAdd100<T> : BaseArray<T>
         }
 
         return oldCapacity;
-    }
-}
-
-public static class DynamicArrayTests
-{
-    public static void OutputResults(List<Benchmarks.TestResult> results)
-    {
-        for (var i=1; i < results.Count; ++i)
-        {
-            var result = results[i];
-            var currSec = result.Elapsed.TotalSeconds;
-            var prevSec = results[i - 1].Elapsed.TotalSeconds;
-            var multiplier = prevSec > 0 ? currSec / prevSec : 0;
-            Console.WriteLine($"N = {result.Input}, Seconds = {currSec:0.####} multiplier = {multiplier:0.##}");
-        }
-    }
-
-    public static int TestDynamicArray(IDynamicArray<int> array, int n)
-    {
-        for (var i = 0; i < n; ++i)
-            array.Add(i);
-        return array.Count;
-    }
-
-    public static void TestDynamicArray(IDynamicArray<int> array)
-    {
-        var results = Benchmarks.RunBenchmark(
-            n => n,
-            n => TestDynamicArray(array, n)).ToList();
-        OutputResults(results);
-    }
-
-    [Test]
-    public static void TestDynamicArrayAddOne()
-    {
-        Console.WriteLine("Test results for add one dynamic array");
-        TestDynamicArray(new DynamicArrayAddOne<int>());
-    }
-
-    [Test]
-    public static void TestDynamicArrayAdd100()
-    {
-        Console.WriteLine("Test results for add 100 dynamic array");
-        TestDynamicArray(new DynamicArrayAdd100<int>());
-    }
-
-    [Test]
-    public static void TestDynamicArrayDoubling() 
-    { 
-        Console.WriteLine("Test results for doubling dynamic array");
-        TestDynamicArray(new DynamicArray<int>());
     }
 }
