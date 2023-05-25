@@ -188,7 +188,8 @@ public static class ArrayProblemsTests
     {
         if (input.Length < 1)
         {
-            Assert.Throws<IndexOutOfRangeException>(() => ArrayProblems.Max(input, Compare));
+            Assert.Throws<IndexOutOfRangeException>(() 
+                => ArrayProblems.Max(input, Compare));
         }
         else
         {
@@ -224,7 +225,7 @@ public static class ArrayProblemsTests
     [TestCaseSource(nameof(TestInputs))]
     public static void HasDuplicatesTest(int[] input)
     {
-        Assert.AreEqual(input.Distinct().Count() == input.Length,
+        Assert.AreEqual(input.Distinct().Count() != input.Length,
             ArrayProblems.HasDuplicates(input));
     }
 

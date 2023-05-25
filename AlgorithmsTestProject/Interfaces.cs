@@ -38,7 +38,7 @@ public interface IDynamicArray<T> : IArray<T>
 {
     void Add(T x);
     void Insert(int index, T item);
-    void Remove(int index);
+    T Remove(int index);
 }
 
 public interface IPriorityQueue<T>
@@ -71,7 +71,7 @@ public interface ISequence<T, TIterator>
 public interface IList<T, TIterator>
     : ISequence<T, TIterator>
 {
-    TIterator Add(TIterator iterator, T item);
+    TIterator Insert(TIterator iterator, T item);
     TIterator Remove(TIterator iterator);
 }
 
@@ -141,4 +141,16 @@ public interface IMultiSet<T>
 public interface IMultiSetContainer<T>
     : ISetContainer<T>, IMultiSet<T>
 {
+}
+
+public interface IStream<T>
+{
+    bool AtEnd { get; }
+    T Read();
+}
+
+public interface IOutputStream<T>
+{
+    void Close();
+    void Write(T x); 
 }

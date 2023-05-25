@@ -37,7 +37,7 @@ public abstract class BaseArray<T> : IDynamicArray<T>
     public void Insert(int index, T item)
         => throw new NotImplementedException();
     
-    public void Remove(int index)
+    public T Remove(int index)
         => throw new NotImplementedException();
 }
 
