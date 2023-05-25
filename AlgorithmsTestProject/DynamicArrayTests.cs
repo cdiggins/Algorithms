@@ -11,9 +11,6 @@ namespace AlgorithmsTestProject
         [Test]
         public static void TestInsert()
         {
-            var xs = new[] { 1, 5 };
-            var ys = new[] { 2, 3, 4 };
-            var expected = new[] { 1, 2, 3, 4, 5 };
             var da = new DynamicArray<int>();
             da.Add(1);
             da.Add(5);

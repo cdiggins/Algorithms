@@ -44,8 +44,10 @@ public abstract class BaseArray<T> : IDynamicArray<T>
 
     public T Remove(int index)
     {
+        var r = this[index];
         Array.Copy(_array, index + 1, _array, index, Count - index + 1);
         Count -= 1;
+        return r;
     }
 }
 

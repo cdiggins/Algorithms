@@ -99,7 +99,11 @@ namespace AlgorithmsTestProject
             OutputResults(combinations);
         }
 
-        public static void GenerateCombinations(int[] input, int index, List<int> previous, List<List<int>> combinations)
+        public static void GenerateCombinations(
+            int[] input, 
+            int index, 
+            List<int> previous, 
+            List<List<int>> combinations)
         {
             if (index >= input.Length)
                 return;
@@ -117,7 +121,9 @@ namespace AlgorithmsTestProject
             return combinations;
         }
 
-        public static IEnumerable<List<int>> GenerateCombinationsWrong(IEnumerable<int> current, IEnumerable<int> remaining)
+        public static IEnumerable<List<int>> GenerateCombinationsWrong(
+            IEnumerable<int> current, 
+            IEnumerable<int> remaining)
         {
             yield return current.ToList();
 
