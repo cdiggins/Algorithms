@@ -14,14 +14,30 @@ namespace AlgorithmsTestProject
             self.Insert(self.GetIterator(), x);
         }
 
+        public static IIterator<T> GetLastIterator<T>(this IList<T> self)
+        {
+            var iter = self.GetIterator();
+            while (iter.HasValue())
+                iter = iter.GetNext();
+            return iter;
+        }
+
         public static void Append<T>(this IList<T> self, T x)
         {
-            throw new NotImplementedException();
+            self.Insert(self.GetLastIterator(), x);
         }
 
         public static T GetAt<T>(this IList<T> self, int index)
         {
-            throw new NotImplementedException();
+            var i = 0; 
+            var iter = self.GetIterator();
+            while (iter.HasValue() && i < index)
+            {
+                iter = iter.GetNext();
+                i += 1;
+            }
+
+            return iter.GetElement();
         }
 
         public static void SetAt<T>(this IList<T> self, int index, T element)
