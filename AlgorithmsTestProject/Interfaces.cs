@@ -75,6 +75,13 @@ public interface IList<T, TIterator>
     TIterator Remove(TIterator iterator);
 }
 
+public interface IList<T>
+    : ISequence<T>
+{
+    IIterator<T> Insert(IIterator<T> iterator, T item);
+    IIterator<T> Remove(IIterator<T> iterator);
+}
+
 public interface ITree<T>
 {
     T Value { get; }
