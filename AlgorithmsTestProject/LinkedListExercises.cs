@@ -11,7 +11,7 @@ namespace AlgorithmsTestProject
 
         public static void Prepend<T>(this IList<T> self, T x)
         {
-            throw new NotImplementedException();
+            self.Insert(self.GetIterator(), x);
         }
 
         public static void Append<T>(this IList<T> self, T x)
@@ -37,6 +37,7 @@ namespace AlgorithmsTestProject
         public static IList<T> Reverse<T>()
         {
             throw new NotImplementedException();
+
         }
 
         public static IEnumerable<T> Enumerate<T>(this IList<T> self)
