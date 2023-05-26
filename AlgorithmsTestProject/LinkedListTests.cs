@@ -8,7 +8,7 @@ namespace AlgorithmsTestProject
 {
     public static class LinkedListTests
     {
-        public static int TestCount()
+        public static void TestCount()
         {
         }
 
@@ -36,7 +36,7 @@ namespace AlgorithmsTestProject
         {
         }
 
-        public static Void TestEnumerate()
+        public static void TestEnumerate()
         {
         }
     }

@@ -9,13 +9,36 @@ namespace AlgorithmsTestProject
             return self.Enumerate().Count();
         }
 
-        /*public static void Prepend<T>(this IList<T>T x)
-        void Append(T x)
-        T GetAt(int index)
-        void SetAt(int index, T element)
-        void Swap(Iterator<T> a, Iterator<T> b)
-        IList<T> Reverse()
-        */
+        public static void Prepend<T>(this IList<T> self, T x)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static void Append<T>(this IList<T> self, T x)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static T GetAt<T>(this IList<T> self, int index)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static void SetAt<T>(this IList<T> self, int index, T element)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static void Swap<T>(this IList<T> self, IIterator<T> a, IIterator<T> b)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static IList<T> Reverse<T>()
+        {
+            throw new NotImplementedException();
+        }
+
         public static IEnumerable<T> Enumerate<T>(this IList<T> self)
         {
             for (var iter = self.GetIterator(); 
