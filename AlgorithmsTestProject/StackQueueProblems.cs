@@ -57,6 +57,8 @@ namespace AlgorithmsTestProject
         {
             throw new NotImplementedException();
         }
+
+        public bool IsEmpty => throw new NotImplementedException();
     }
 
     public class QueueFromStack<T> : IQueue<T>
