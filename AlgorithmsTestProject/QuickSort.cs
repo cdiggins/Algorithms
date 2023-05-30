@@ -1,7 +1,26 @@
 ﻿using System.Diagnostics;
+using System.Text;
 
 namespace AlgorithmsTestProject
 {
+    public static class SimpleQuickSort
+    {
+        public static IEnumerable<T> QuickSort<T>(
+            IEnumerable<T> input,
+            Func<T, T, int> compare)
+        {
+            if (!input.Any()) return input;
+            var pivot = input.First();
+            var rest = input.Skip(1);
+            if (!rest.Any()) return input;
+            var leftPart = rest.Where(x => compare(x, pivot) <= 0);
+            var rightPart = rest.Where(x => compare(x, pivot) > 0);
+            var left = QuickSort(leftPart, compare);
+            var right = QuickSort(rightPart, compare);
+            return left.Append(pivot).Concat(right);
+        }
+    }
+
     public class QuickSort<T>
     {
         public System.Collections.Generic.IList<T> Input { get; }
@@ -36,7 +55,7 @@ namespace AlgorithmsTestProject
             return IsGreaterThan(Input[i], Input[j]); 
         }
 
-        public bool IsGreaterThanAtOrEqual(int i, int j)
+        public bool IsGreaterThanOrEqualAt(int i, int j)
         {
             return IsGreaterThanOrEqual(Input[i], Input[j]);
         }
@@ -64,98 +83,124 @@ namespace AlgorithmsTestProject
                 return;
             }
 
-            var pivotIndex = Partition(from, upTo);
-
-#if DEBUG            
-            CheckPartitionInvariant(pivotIndex, from, upTo);
-#endif
+            var pivotIndex = Partition(from, count);
 
             // Notice that we can leave the pivot alone: it is a single value 
             // and is therefore sorted.
             // Everything to the left is smaller, but unsorted
             // Everything to the right is bigger, but unsorted 
-            Sort(from, pivotIndex - 1);
+            Sort(from, pivotIndex);
             Sort(pivotIndex + 1, upTo);
         }
 
-        public void CheckPartitionInvariant(int pivotIndex, int from, int upTo)
+        public void CheckPartitionInvariant(int from, int upto, int i, int j, int p)
         {
-            Debug.Assert(pivotIndex >= from);
-            Debug.Assert(pivotIndex < upTo);
-            for (var i = 0; i < upTo; i++)
+            Debug.Assert(i >= from);
+            Debug.Assert(j >= from);
+            Debug.Assert(from < upto);
+            Debug.Assert(i < upto);
+            Debug.Assert(j < upto);
+            for (var x = from; x < i; ++x)
             {
-                if (i < pivotIndex)
-                {
-                    //Debug.Assert(IsGreaterThanAtOrEqual(pivotIndex, i));
-                }
-                else if (i > pivotIndex)
-                {
-                    //Debug.Assert(IsGreaterThanAtOrEqual(i, pivotIndex));
-                }
+                Debug.Assert(IsGreaterThanOrEqualAt(p, x));
             }
+            for (var x = j + 1; x < upto; ++x)
+            {
+                Debug.Assert(IsGreaterThanOrEqualAt(x, p));
+            }
+        }
+
+        public void OutputPartitionState(string message, int from, int count, int i, int j, int p)
+        {
+            var sb = new StringBuilder();
+            Debug.Assert(i >= from);
+
+            sb.Append("[");
+            for (var x = from; x < from + count; x++)
+            {
+                if (x > from) sb.Append(" ");
+                if (x == i)
+                    sb.Append("i=");
+                if (x == j)
+                    sb.Append("j=");
+                if (x == p)
+                    sb.Append("p=");
+                sb.Append(Input[x]);
+            }
+            sb.Append("]");
+
+            Debug.WriteLine(message);
+            Debug.WriteLine(sb.ToString());
         }
 
         /// <summary>
         /// Partitions a section of array
         /// into small and large values.
-        /// The return result is the index where the partition
-        /// starts. All values to the left of that value are less than it,
+        /// The return result is the index where the right partition
+        /// starts.
+        /// All values to the left of that value are less than it,
         /// and all values to the right of the value are greater than or equal. 
         /// </summary>
-        public int Partition(int from, int upTo)
+        public int Partition(int from, int count)
         {
+            // Top index (exclusive)
+            var upTo = from + count;
+
+            // i is one past the left partition end
+            // In other words next candidate for left partition
             var i = from;
-            var j = upTo - 1;
-            var pivot = Input[j];
 
-            // The right partition 
+            // p is the pivot index
+            var p = upTo - 1;
 
-            // Move the i value up (left partition)
-            // Move the j value down (right partition)
-            // Make sure that everything on 
+            // j is one before the right partition start
+            // In other words next candidate for right partition
+            var j = p - 1;
+
+            var index = 0;
             while (i < j)
             {
-                // Is a value in the left greater than pivot? 
-                if (IsGreaterThan(Input[i], pivot))
-                {
-                    // We are going to have to find a value to swap it with
-                    // We do this by finding a value in the right partition
-                    // that does not belong. So while values above or equal to a[j]
-                    // are correct, decrement j
-                    while (IsGreaterThanOrEqual(Input[j], pivot))
-                    {
-                        j -= 1;
+                CheckPartitionInvariant(from, upTo, i, j, p);
+                OutputPartitionState($"{index++}: Looking for a left value to swap with", from, count, i, j, p);
 
-                        // Make sure we don't go past i. 
-                        // If we get to i then 
-                        // I could have combined this with the invariant
-                        if (j == i)
-                            break;
+                if (IsGreaterThanAt(p, i))
+                {
+                    i += 1;
+                }
+                else
+                {
+                    // We are going to need to swap.
+
+                    // Find the first value on the right side
+                    // that should not be in the right partitions
+                    while (IsGreaterThanOrEqualAt(j, p) && j > i)
+                    {
+                        CheckPartitionInvariant(from, upTo, i, j, p);
+                        OutputPartitionState($"{index++}: Looking for a right value to swap with", from, count, i, j, p);
+
+                        j -= 1;
                     }
 
-                    // Make sure we aren't done completely 
-                    if (i != j)
+                    if (i < j)
                     {
-                        // We not have a candidate to swap with. 
-                        // value at i is greater than candidate
-                        // value at j is less than candidate
-                        Debug.Assert(IsGreaterThanAt(i, j));
-
+                        OutputPartitionState("About to swap", from, count, i, j, p);
                         Swap(i, j);
-                        // We now know that a[j] is greater than or equal to pivot 
-                        // Because it is the old a[i].
-                        // So we can decrement the right partition index
-                        j -= 1; 
+                        i += 1;
+                        j -= 1;
+                        OutputPartitionState("Swapped", from, count, i, j, p);
                     }
                 }
 
-                if (i != j)
-                    i += 1; 
+                CheckPartitionInvariant(from, upTo, i, j, p);
             }
 
-            Debug.Assert(i == j);
-            Swap(i + 1, upTo-1);
-            return i;
+            Swap(j, p);
+            p = j;
+
+            OutputPartitionState("Final state", from, count, i, j, p);
+            CheckPartitionInvariant(from, upTo, i, j, p);
+
+            return p;
         }
     }
 }
