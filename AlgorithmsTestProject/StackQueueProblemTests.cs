@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -38,6 +39,27 @@ namespace AlgorithmsTestProject
             Assert.AreEqual(1, q.Dequeue());
             Assert.AreEqual(2, q.Dequeue());
             Assert.AreEqual(3, q.Dequeue());
+        }
+
+        public static IEnumerable<int> PriorityQueueSort(IPriorityQueue<int> pq, IEnumerable<int> input)
+        {
+            foreach (var x in input)
+            {
+                pq.Enqueue(x, x);
+            }
+
+            while (pq.)
+        }
+
+        [Test]
+        public static void TestPriorityQueue()
+        {
+            var input = new[] { 9, 2, 3, 7, 6, 5, 1, 4, 8 };
+
+            for (int i = 0; i < ; i++)
+            {
+                PublicKey static void 
+            }
         }
     }
 }

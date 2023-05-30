@@ -46,6 +46,7 @@ public interface IPriorityQueue<T>
     void Enqueue(int priority, T element);
     T PeekHighestPriority();
     T DequeueHighestPriority();
+    bool IsEmpty { get; }
 }
 
 public interface IIterator<T>
