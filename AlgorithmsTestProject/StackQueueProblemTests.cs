@@ -41,25 +41,23 @@ namespace AlgorithmsTestProject
             Assert.AreEqual(3, q.Dequeue());
         }
 
-        public static IEnumerable<int> PriorityQueueSort(IPriorityQueue<int> pq, IEnumerable<int> input)
+        public static IEnumerable<int> PriorityQueueSort(
+            IPriorityQueue<int> pq, 
+            IEnumerable<int> input)
         {
             foreach (var x in input)
-            {
-                pq.Enqueue(x, x);
-            }
+                pq.Enqueue(-x, x);
 
-            while (pq.)
+            while (!pq.IsEmpty)
+                yield return pq.DequeueHighestPriority();
         }
 
         [Test]
         public static void TestPriorityQueue()
         {
             var input = new[] { 9, 2, 3, 7, 6, 5, 1, 4, 8 };
-
-            for (int i = 0; i < ; i++)
-            {
-                PublicKey static void 
-            }
+            var output = PriorityQueueSort(new PriorityQueue<int>(), input);
+            Assert.AreEqual(input, output);
         }
     }
 }
