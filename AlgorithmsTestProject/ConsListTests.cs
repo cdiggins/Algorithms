@@ -26,14 +26,24 @@ namespace AlgorithmsTestProject
             Assert.AreEqual(xs, r.Reverse().ToEnumerable());
         }
 
+        [Test]
         public static void TestInsert()
         {
-
+            var xs = new[] { 1, 2, 3, 4, 5 };
+            var exp = new[] { 1, 2, 2, 3, 4, 5 };
+            var r = xs.ToConsList();
+            var output = r.InsertBefore(2, 2);
+            Assert.AreEqual(exp, output.ToEnumerable());
         }
 
+        [Test]
         public static void TestRemove()
         {
-
+            var xs = new[] { 1, 2, 3, 4, 5 };
+            var exp = new[] { 1, 2, 4, 5 };
+            var r = xs.ToConsList();
+            var output = r.RemoveAt(2);
+            Assert.AreEqual(exp, output.ToEnumerable());
         }
 
     }
