@@ -136,7 +136,7 @@ public static class ConsListExtensions
     }
 
     public static IConsList<T> ToConsList<T>(this IEnumerable<T> self)
-        => self.Aggregate(ConsList<T>.Empty, Prepend);
+        => self.Aggregate(ConsList<T>.Empty, Prepend).Reverse();
 
     public static IConsList<T> ToConsList<T>(this ISequence<T> self)
         => self.Enumerate().ToConsList();
