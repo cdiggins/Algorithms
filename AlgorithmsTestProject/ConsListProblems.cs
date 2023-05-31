@@ -9,7 +9,7 @@ public static class ConsListProblems
     }
 
     public static IConsList<T> RemoveAt<T>(this IConsList<T> self, 
-        int index, T value)
+        int index)
     {
         throw new NotImplementedException();
     }

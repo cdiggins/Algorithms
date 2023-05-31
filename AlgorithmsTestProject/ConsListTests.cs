@@ -20,11 +20,7 @@ namespace AlgorithmsTestProject
         public static void ConsListTest()
         {
             var xs = new[] { 1, 2, 3, 4, 5 };
-            var r = ConsList<int>.Empty;
-            foreach (var x in xs)
-            {
-                r = r.Prepend(x);
-            }
+            var r = xs.ToConsList();
             Output(r);
             Assert.AreEqual(xs.Reverse(), r.ToEnumerable());
             Assert.AreEqual(xs, r.Reverse().ToEnumerable());
@@ -34,22 +30,11 @@ namespace AlgorithmsTestProject
         {
 
         }
+
+        public static void TestRemove()
+        {
+
+        }
+
     }
-
-
-    public static class ConsListProblems
-    {
-        public static IConsList<T> InsertBefore<T>(this IConsList<T> self, 
-            int index, T value)
-        {
-            throw new NotImplementedException();
-        }
-
-        public static IConsList<T> RemoveAt<T>(this IConsList<T> self, 
-            int index, T value)
-        {
-            throw new NotImplementedException();
-        }
-     }
-
 }
