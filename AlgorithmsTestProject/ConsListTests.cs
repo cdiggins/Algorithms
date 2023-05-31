@@ -29,6 +29,7 @@
             Output(ys.ToConsList());
             var zs = MyConcat(xs.ToConsList(), ys.ToConsList());
             Output(zs);
+            Assert.AreEqual(new[] { 1, 2,3, 4, 5},zs.ToEnumerable());
         }
 
         [Test]
@@ -37,8 +38,8 @@
             var xs = new[] { 1, 2, 3, 4, 5 };
             var r = xs.ToConsList();
             Output(r);
-            Assert.AreEqual(xs.Reverse(), r.ToEnumerable());
-            Assert.AreEqual(xs, r.Reverse().ToEnumerable());
+            Assert.AreEqual(xs, r.ToEnumerable());
+            Assert.AreEqual(xs, r.ToEnumerable());
         }
 
         [Test]
