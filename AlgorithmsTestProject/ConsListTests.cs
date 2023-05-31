@@ -22,12 +22,43 @@
 
         public static IConsList<T> MyRemove<T>(IConsList<T> xs, int n)
         {
-            return MyConcat(MyTake(xs, n), xs.Skip(n + 1));
+            Console.WriteLine($"Calling my remove at the {n} index ");
+            Output(xs);
+
+            Console.WriteLine($"First {n} elements are");
+            var left = MyTake(xs, n);
+            Output(left);
+
+            Console.WriteLine($"After {n}+1 elements are");
+            var right = xs.Skip(n + 1);
+            Output(right);
+
+            return MyConcat(left, right);
         }
 
         public static IConsList<T> MyInsert<T>(IConsList<T> xs, int n, T x)
         {
-            return MyConcat(MyTake(xs, n), xs.Skip(n).Prepend(x));
+            Console.WriteLine("Calling my insert");
+            Output(xs);
+            var left = MyTake(xs, n);
+
+            Console.WriteLine($"First {n} elements is:");
+            Output(left);
+
+            var right = xs.Skip(n);
+
+            Console.WriteLine($"Elements after {n} is:");
+            Output(right);
+
+            Console.WriteLine($"Prepending the value to be inserted {x}");
+            right = right.Prepend(x);
+            Output(right);
+
+            var result = MyConcat(left, right);
+            Console.WriteLine("Result of concatenation is");
+            Output(result);
+
+            return result;
         }
 
         public static IConsList<T> MyTake<T>(IConsList<T> xs, int n)
