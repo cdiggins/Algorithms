@@ -3,22 +3,35 @@ namespace AlgorithmsTestProject
 {
     public class Stack<T> : IStack<T>
     {
+        public LinkedList<T> memberList = new();
+
         public void Push(T x)
         {
-            throw new NotImplementedException();
+            memberList.Insert(memberList.GetIterator(), x);
         }
 
         public T Pop()
         {
-            throw new NotImplementedException();
+            var iter = memberList.GetIterator();
+            var r = iter.GetElement();
+            memberList.Remove(iter);
+            return r;
         }
 
         public T Peek()
         {
-            throw new NotImplementedException();
+            var iter = memberList.GetIterator();
+            return iter.GetElement();
         }
 
-        public bool IsEmpty { get; }
+        public bool IsEmpty
+        {
+            get
+            {
+                var iter = memberList.GetIterator();
+                return !iter.HasValue();
+            }
+        }
     }
 
     public class Queue<T> : IQueue<T>

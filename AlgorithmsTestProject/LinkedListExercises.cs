@@ -56,7 +56,7 @@ namespace AlgorithmsTestProject
 
         }
 
-        public static IEnumerable<T> Enumerate<T>(this IList<T> self)
+        public static IEnumerable<T> Enumerate<T>(this ISequence<T> self)
         {
             for (var iter = self.GetIterator(); 
                  iter.HasValue(); 

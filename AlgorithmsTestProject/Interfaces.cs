@@ -56,11 +56,6 @@ public interface IIterator<T>
     IIterator<T> GetNext();
 }
 
-public interface ISequence<T>
-{
-    IIterator<T> GetIterator();
-}
-
 public interface ISequence<T, TIterator>
 {
     T GetElement(TIterator iter);
@@ -76,6 +71,11 @@ public interface IList<T, TIterator>
     TIterator Remove(TIterator iterator);
 }
 
+public interface ISequence<T>
+{
+    IIterator<T> GetIterator();
+}
+
 public interface IList<T>
     : ISequence<T>
 {
@@ -83,16 +83,16 @@ public interface IList<T>
     IIterator<T> Remove(IIterator<T> iterator);
 }
 
-public interface ITree<T>
-{
-    T Value { get; }
-    IEnumerable<ITree<T>> Subtrees { get; }
-}
-
 public interface ITree<T, TNode>
 {
     T GetValue(TNode node);
     IEnumerable<TNode> GetChildren(TNode node);
+}
+
+public interface ITree<T>
+{
+    T Value { get; }
+    IEnumerable<ITree<T>> Subtrees { get; }
 }
 
 public interface IBinaryTree<T> : ITree<T>
@@ -161,4 +161,11 @@ public interface IOutputStream<T>
 {
     void Close();
     void Write(T x); 
+}
+
+public interface IConsList<T>
+{
+    T Value { get; }
+    bool IsEmpty { get; }
+    IConsList<T> Rest { get; }
 }

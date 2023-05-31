@@ -3,6 +3,87 @@
 public static class RecursionProblemTests
 {
     [Test]
+    public static void TestFactorial()
+    {
+        Assert.AreEqual(1, RecursionProblems.Factorial(1));
+        Assert.AreEqual(2, RecursionProblems.Factorial(2));
+        Assert.AreEqual(6, RecursionProblems.Factorial(3));
+        Assert.AreEqual(24, RecursionProblems.Factorial(4));
+    }
+
+    [Test]
+    public static void TestFibonnaci()
+    {
+        Assert.AreEqual(0, RecursionProblems.Fibonnaci(0));
+        Assert.AreEqual(1, RecursionProblems.Fibonnaci(1));
+        Assert.AreEqual(1, RecursionProblems.Fibonnaci(2));
+        Assert.AreEqual(2, RecursionProblems.Fibonnaci(3));
+        Assert.AreEqual(3, RecursionProblems.Fibonnaci(4));
+        Assert.AreEqual(5, RecursionProblems.Fibonnaci(5));
+        Assert.AreEqual(8, RecursionProblems.Fibonnaci(6));
+    }
+
+    [Test]
+    public static void TestReverseArray()
+    {
+        var expected = new[] { 5, 4, 3, 2, 1 };
+        var source = new[] { 1, 2, 3, 4, 5 }; 
+        RecursionProblems.ReverseArray(source);
+        Assert.AreEqual(expected, source);
+    }
+
+    public static IList<int> TestList()
+    {
+        var r = new LinkedList<int>();
+        var iter = r.GetIterator();
+        for (var i = 0; i < 5; i++)
+        {
+            iter = r.Insert(iter, i);
+        }
+        return r;
+    }
+
+    [Test]
+    public static void TestCount()
+    {
+        var list = TestList();
+        Assert.AreEqual(5, RecursionProblems.Count(list.GetIterator()));
+    }
+
+    [Test]
+    public static void TestLast()
+    {
+        var list = TestList();
+        var last = RecursionProblems.GetLast(list.GetIterator());
+        Assert.AreEqual(4, last.GetElement());
+    }
+
+    [Test]
+    public static void TestSum()
+    {
+        var list = TestList();
+        var sum = RecursionProblems.Sum(list.GetIterator());
+        Assert.AreEqual(10, sum);
+    }
+
+    [Test]
+    public static void TestReverse()
+    {
+        var list = TestList();
+        var rlist = RecursionProblems.Reverse(list);
+        Assert.AreEqual(list.Enumerate(), rlist.Enumerate());
+    }
+
+    [Test]
+    public static void TestMergeSort()
+    {
+        var xs = new List<int>() { 1, 5, 4, 2, 3 };
+        var ys = RecursionProblems.MergeSort(xs);
+        Assert.AreEqual(new[] { 1, 2, 3, 4, 5 }, ys);
+    }
+
+
+    [Test]
     public static void TestSort()
     {
         var xs = new List<int>() { 1, 5, 4, 2, 3 };
