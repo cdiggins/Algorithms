@@ -49,6 +49,7 @@ public static class TreeAlgorithms
             root.Right.Map(transform));
     }
 
+    /*
     public static IBinaryTree<T> Filter<T>(this IBinaryTree<T> root, Func<T, bool> predicate)
     {
         if (root == null)
@@ -59,22 +60,15 @@ public static class TreeAlgorithms
                 root.Left.Filter(predicate),
                 root.Right.Filter(predicate));
 
-        var next = root.Right;
-        
+        var next = root.Right.GetLeftmostNode();
+        if (next )
+
         return new BinaryTree<T>(
                 root.Value,
                 root.Left.Filter(predicate),
                 root.Right.Filter(predicate));
     }
-
-    public static IBinaryTree<T> GetNextNode<T>(this IBinaryTree<T> root)
-    {
-
-    }
-
-    public static bool IsLeftChild<T>(this IBinaryTree<T> root)
-    {
-    }
+    */
 
     public static IBinaryTree<T> GetLeftmostNode<T>(this IBinaryTree<T> root)
     {

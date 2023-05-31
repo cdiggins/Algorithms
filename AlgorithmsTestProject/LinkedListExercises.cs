@@ -29,7 +29,7 @@ namespace AlgorithmsTestProject
 
         public static T GetAt<T>(this IList<T> self, int index)
         {
-            var i = 0; 
+            var i = 0;
             var iter = self.GetIterator();
             while (iter.HasValue() && i < index)
             {
@@ -54,16 +54,6 @@ namespace AlgorithmsTestProject
         {
             throw new NotImplementedException();
 
-        }
-
-        public static IEnumerable<T> Enumerate<T>(this ISequence<T> self)
-        {
-            for (var iter = self.GetIterator(); 
-                 iter.HasValue(); 
-                 iter = iter.GetNext())
-            {
-                yield return iter.GetElement();
-            }
         }
     }
 }

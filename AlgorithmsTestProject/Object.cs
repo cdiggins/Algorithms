@@ -16,10 +16,5 @@ public class Object : IMap<string, object>
 
 public static class ObjectDemo
 {
-    [Test]
-    public void MyObjectTest
-    {
-
-    }
 
 }
