@@ -155,7 +155,6 @@ public static class RecursionProblemTests
         Assert.AreEqual(new[] { 1,2,3,4,5,6}, zs);
     }
 
-
     public static TAcc Aggregate<TAcc, T>(IIterator<T> iter, TAcc accumulator,
         Func<TAcc, T, TAcc> func)
     {

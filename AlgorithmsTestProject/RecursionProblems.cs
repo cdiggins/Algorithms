@@ -43,7 +43,9 @@ namespace AlgorithmsTestProject
             throw new NotImplementedException();
         }
 
-        public static IEnumerable<int> Merge(IEnumerable<int> xs, IEnumerable<int> ys)
+        public static IEnumerable<int> Merge(
+            IEnumerable<int> xs, 
+            IEnumerable<int> ys)
         {
             foreach (var x in xs)
             {

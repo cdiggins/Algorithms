@@ -169,3 +169,11 @@ public interface IConsList<T>
     bool IsEmpty { get; }
     IConsList<T> Rest { get; }
 }
+
+public interface IReadOnlyArray<T>
+{
+    int Count { get; }
+    T this[int index] { get; }
+}
+
+
