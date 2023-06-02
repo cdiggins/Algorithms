@@ -80,4 +80,39 @@ public static class TreeAlgorithmTests
         Console.WriteLine($"Elapsed time for LINQ sort: {sw.Elapsed.TotalSeconds:0.####}");
         Assert.AreEqual(expected, output);
     }
+
+    public static int LeftChildIndex(int index)
+        => index * 2 + 1;
+
+    public static int RightChildIndex(int index)
+        => index * 2 + 2;
+
+    public static bool HasLeftChild(int[] xs, int index)
+        => LeftChildIndex(index) < xs.Length;
+
+    public static bool HasRightChild(int[] xs, int index)
+        => RightChildIndex(index) < xs.Length;
+
+    public static bool IsHeap(int[] xs, int index)
+    {
+        if (HasLeftChild(xs, index))
+        {
+            var left = LeftChildIndex(index);
+            if (xs[index] < xs[left])
+                return false;
+            if (!IsHeap(xs, left))
+                return false;
+        }
+
+        if (HasRightChild(xs, index))
+        {
+            var right = RightChildIndex(index);
+            if (xs[index] < xs[right])
+                return false;
+            if (!IsHeap(xs, right))
+                return false;
+        }
+
+        return true;
+    }
 }
