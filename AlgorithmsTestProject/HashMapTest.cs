@@ -82,7 +82,7 @@ namespace AlgorithmsTestProject
                         d.Add(k.MyString, true);
                 }
 
-                Console.WriteLine($"Time to insert {keys.Length} items was {sw.Elapsed.Milliseconds:0.####}ms");
+                Console.WriteLine($"Time to insert {keys.Length} items was {sw.Elapsed.TotalMilliseconds:0.####}ms");
             }
         }
 
