@@ -14,7 +14,8 @@ namespace AlgorithmsTestProject
 
         public override int GetHashCode()
         {
-            return MyString.GetHashCode();
+            //return MyString.GetHashCode();
+            return MyString[1];
         }
 
         public override bool Equals(object obj)
@@ -36,7 +37,7 @@ namespace AlgorithmsTestProject
         {
             var sb = new StringBuilder();
             sb.Append('a');
-            for (var i = 0; i < 5; ++i)
+            for (var i = 0; i < 50000; ++i)
             {
                 sb.Append(RandomLetter());
             }
@@ -45,7 +46,7 @@ namespace AlgorithmsTestProject
 
         public static IEnumerable<string> GeneratInputStrings()
         {
-            for (var i = 0; i < 1000000; ++i)
+            for (var i = 0; i < 1000; ++i)
                 yield return RandomString();
         }
 
@@ -53,7 +54,7 @@ namespace AlgorithmsTestProject
         public static void TestHash()
         {
             var input = GeneratInputStrings().Take(10000).ToArray();
-            foreach (var s in input)
+            foreach (var s in input.Take(10))
             {
                 //Console.WriteLine(s);
             }
@@ -69,7 +70,7 @@ namespace AlgorithmsTestProject
                         d.Add(k, true);
                 }
 
-                Console.WriteLine($"Time to insert {keys.Length} items was {sw.Elapsed.Milliseconds:0.####}ms");
+                Console.WriteLine($"Time to insert {keys.Length} items was {sw.Elapsed.TotalMilliseconds:0.####}ms");
             }
             {
                 Console.WriteLine($"Creating a dictionary with default hash function");
