@@ -14,8 +14,10 @@ namespace AlgorithmsTestProject
 
         public override int GetHashCode()
         {
-            //return MyString.GetHashCode();
-            return MyString[1];
+            var sum = 0;
+            for (var i=0; i < MyString.Length; ++i)
+                sum = sum * 100 + MyString[i];
+            return sum;
         }
 
         public override bool Equals(object obj)
@@ -85,6 +87,5 @@ namespace AlgorithmsTestProject
                 Console.WriteLine($"Time to insert {keys.Length} items was {sw.Elapsed.TotalMilliseconds:0.####}ms");
             }
         }
-
     }
 }
